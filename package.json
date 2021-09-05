@@ -45,6 +45,7 @@
     "tracked-maps-and-sets": "^3.0.1"
   },
   "devDependencies": {
+    "@docfy/ember": "^0.4.4",
     "@ember/optional-features": "^2.0.0",
     "@ember/test-helpers": "^2.4.0",
     "@embroider/test-setup": "^0.43.5",
