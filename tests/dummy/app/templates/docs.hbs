@@ -1,17 +1,78 @@
-<div class='flex'>
+<div class='flex flex-col md:flex-row min-h-full'>
   <DocfyOutput @scope='docs' as |node|>
-    <ul class='p-2'>
-      {{#each node.pages as |page|}}
-        <li>
-          <DocfyLink @to={{page.url}}>
-            {{page.title}}
-          </DocfyLink>
-        </li>
-      {{/each}}
-    </ul>
+    <nav aria-label='primary navigation' class='bg-gray-200 space-y-1'>
+      <ul class='sticky top-0 p-4'>
+        {{#each node.pages as |page|}}
+          <li>
+            <DocfyLink @activeClass='italic' @to={{page.url}}>
+              {{page.title}}
+            </DocfyLink>
+          </li>
+        {{/each}}
+
+        {{#each node.children as |child|}}
+          <li class='font-bold pt-3 capitalize'>{{child.label}}</li>
+
+          {{#each child.pages as |page|}}
+            <li class='whitespace-nowrap'>
+              <DocfyLink @activeClass='italic' @to={{page.url}}>
+                {{page.title}}
+              </DocfyLink>
+            </li>
+          {{/each}}
+        {{/each}}
+      </ul>
+    </nav>
   </DocfyOutput>
 
-  <div>
+  <div class='markdown p-4 overflow-x-hidden'>
     {{outlet}}
   </div>
+
+  <DocfyOutput @fromCurrentURL={{true}} as |page|>
+    {{#if page.headings.length}}
+      <nav
+        aria-label='secondary navigation'
+        class='whitespace-nowrap hidden lg:block'
+      >
+        <ul class='sticky top-0 p-4'>
+          {{#each page.headings as |heading|}}
+            <li class='border-l border-gray-400 dark:border-gray-700'>
+              <a
+                href='#{{heading.id}}'
+                class='block px-2 py-1 border-l-2 hover:text-green-700
+                  {{if
+                    (docfy-eq heading.id @currentHeadingId)
+                    'border-green-700 text-green-700 dark:border-green-500 dark:text-green-500'
+                    'border-transparent'
+                  }}'
+              >
+                {{heading.title}}
+              </a>
+
+              {{#if heading.headings.length}}
+                <ul class=''>
+                  {{#each heading.headings as |subHeading|}}
+                    <li>
+                      <a
+                        href='#{{subHeading.id}}'
+                        class='block pl-6 py-1 border-l-2 border-l-2 hover:text-green-700
+                          {{if
+                            (docfy-eq subHeading.id @currentHeadingId)
+                            'border-green-700 text-green-700 dark:border-green-500 dark:text-green-500'
+                            'border-transparent'
+                          }}'
+                      >
+                        {{subHeading.title}}
+                      </a>
+                    </li>
+                  {{/each}}
+                </ul>
+              {{/if}}
+            </li>
+          {{/each}}
+        </ul>
+      </nav>
+    {{/if}}
+  </DocfyOutput>
 </div>

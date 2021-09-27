@@ -27,6 +27,7 @@ module.exports = {
     // node files
     {
       files: [
+        '.docfy-config.js',
         '.eslintrc.js',
         '.prettierrc.js',
         '.template-lintrc.js',
@@ -52,6 +53,9 @@ module.exports = {
       },
       plugins: ['node'],
       extends: ['plugin:node/recommended'],
+      rules: {
+        'node/no-unpublished-require': 'off',
+      },
     },
   ],
 };

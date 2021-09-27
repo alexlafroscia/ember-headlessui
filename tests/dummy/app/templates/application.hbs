@@ -1,18 +1,23 @@
-<div class='w-full h-full'>
-  <div
-    class='flex flex-col h-screen overflow-hidden font-sans antialiased text-gray-900 bg-gray-700'
-  >
-    <header
-      class='relative z-10 flex items-center justify-between flex-shrink-0 px-4 py-4 bg-gray-700 border-b border-gray-200 sm:px-6 lg:px-8'
-    >
-      <LinkTo @route='index'>
-        <Logo class='h-6' />
-      </LinkTo>
-    </header>
-    <main class='flex-1 overflow-auto bg-gray-50'>
-      {{outlet}}
+<header
+  class='relative z-10 flex items-center flex-shrink-0 px-4 py-4 bg-gray-700 border-b border-gray-200 space-x-8 sm:px-6 lg:px-8'
+>
+  <LinkTo @route='index'>
+    <Logo class='h-6' />
+    <span class='sr-only'>Headless UI</span>
+  </LinkTo>
 
-      <KeyCaster />
-    </main>
-  </div>
-</div>
+  <div class='flex-grow'></div>
+
+  <LinkTo
+    @route='docs'
+    class='text-white font-bold border-b-2 border-transparent hover:border-blue-400'
+    @activeClass='border-blue-400'
+  >
+    Documentation
+  </LinkTo>
+</header>
+<main class='flex-grow bg-gray-50'>
+  {{outlet}}
+
+  <KeyCaster />
+</main>

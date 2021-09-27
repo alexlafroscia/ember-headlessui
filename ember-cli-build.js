@@ -16,7 +16,9 @@ module.exports = function (defaults) {
     postcssOptions: {
       compile: {
         plugins: [
+          require('postcss-import'),
           require('tailwindcss')('./tests/dummy/config/tailwind.config.js'),
+          require('postcss-nested'),
         ],
       },
     },

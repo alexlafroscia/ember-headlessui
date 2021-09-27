@@ -1,0 +1,4 @@
+/** Applied to the wrapper around the outlet for each Markdown page */
+.markdown {
+  @apply flex flex-col space-y-4;
+}

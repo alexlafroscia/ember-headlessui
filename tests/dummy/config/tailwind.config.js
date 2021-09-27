@@ -25,5 +25,9 @@ module.exports = {
     },
   },
   variants: {},
-  plugins: [require('@tailwindcss/ui')],
+  plugins: [
+    require('@tailwindcss/ui'),
+    // Added `typography` plugin to style Markdown in docs site
+    require('@tailwindcss/typography'),
+  ],
 };
